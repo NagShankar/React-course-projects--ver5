@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import IndecisionApp from "./components/IndecisionApp"; //OR ./components/IndecisionApp.js
 
+//PROPS.CHILDREN example or THIS.PROPS.CHILDREN example
+
 const Layout = (props) => {
     return(
        <div>
