@@ -5,11 +5,15 @@ import Header from "./Header"; //OR ./Header.js
 import Action from "./Action"; //OR ./Action.js
 import Options from "./Options"; //OR ./Options.js
 
+//importing third party component
+import OptionModal from "./OptionModal"; //OR ./OptionModal.js
+
 class IndecisionApp extends React.Component{
     
     
     state={
-        options:[]
+        options:[],
+        selectedOption: undefined
     }
     
     
@@ -74,11 +78,25 @@ class IndecisionApp extends React.Component{
        
        selectRandomNum = () => {
            const randomNum=Math.floor(Math.random() * this.state.options.length);
-           alert (randomNum + " " +this.state.options[randomNum]);
+           //alert (randomNum + " " +this.state.options[randomNum]);
+           const option= randomNum + " " +this.state.options[randomNum];
+           //now alerting from modal
+           this.setState(()=>{
+               return { selectedOption : option }
+               
+           });
            
        };
-    
-    
+
+//modal closing method
+closeModal = () => {
+            this.setState(()=>({ 
+                selectedOption: undefined
+            }));
+        };
+
+//lifecycle methods usage 
+
     componentDidMount(){
         //use try catch for any wrong json format
          try{
@@ -118,6 +136,8 @@ class IndecisionApp extends React.Component{
                              deleteSingleOption={this.handleSingleDeleteOption}
                      />
                   <AddOption addingOption={this.handleAddOption}/>
+                   
+                <OptionModal sendingSelectedOption={this.state.selectedOption} closingModal={this.closeModal}/>
             
             </div>
         
