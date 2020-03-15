@@ -39,13 +39,33 @@ class IndecisionApp extends React.Component{
         };
  
    handleAddOption = (option) => {
+       
+       const upp=option.toString().toUpperCase();
+       const res= this.state.options.map((item)=>{
+                return item.toUpperCase();
+              });
+       
+       
             //validation
             if(!option){ //if option doesnt exist
                 return 'Please add something :('
               }
-              else if(this.state.options.indexOf(option)>-1){
+              else if(this.state.options.indexOf(option)>-1 || res.includes(upp)){
                 return 'Option already exist!!!!'
                }
+       
+//             else if(res.includes(upp)){
+//                return 'Duplicate value again'
+//               }
+       
+       //OR....
+       
+//        else if (this.state.options.map(function(item){ return item.toLowerCase()} ).indexOf(option.toLowerCase()) != -1){
+//           return 'Duplicate value hahaha'
+//       }
+//       
+     
+       
             
             else{
                  
@@ -79,8 +99,9 @@ class IndecisionApp extends React.Component{
        selectRandomNum = () => {
            const randomNum=Math.floor(Math.random() * this.state.options.length);
            //alert (randomNum + " " +this.state.options[randomNum]);
-           const option= randomNum + " " +this.state.options[randomNum];
+           const option= (randomNum+1) + " " +this.state.options[randomNum];
            //now alerting from modal
+           
            this.setState(()=>{
                return { selectedOption : option }
                
